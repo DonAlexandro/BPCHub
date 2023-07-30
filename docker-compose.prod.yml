@@ -7,7 +7,7 @@ services:
         NODE_ENV: production
     environment:
       - NODE_ENV=production
-    # command: production command here
+    command: npm run build
 
   backend:
     build:
@@ -16,4 +16,13 @@ services:
         NODE_ENV: production
     environment:
       - NODE_ENV=production
-    # command: production command here
+    command: npm run build
+
+  scrapper:
+    build:
+      context: ./scrapper
+      args:
+        NODE_ENV: production
+    environment:
+      - NODE_ENV=production
+    command: npm run start:prod

@@ -1,5 +1,5 @@
 FROM node:19.3.0
-WORKDIR /server
+WORKDIR /scrapper
 
 COPY package.json .
 ARG NODE_ENV
@@ -9,4 +9,4 @@ RUN if [ "$NODE_ENV" = "development" ]; \
     fi
 
 COPY . ./
-CMD ["npm", "run", "develop"]
+CMD ["npm", "run", "start:dev"]
