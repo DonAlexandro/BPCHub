@@ -1,0 +1,24 @@
+{
+  "name": "bpchub",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "prepare": "husky install",
+    "format": "npx prettier --write ."
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/DonAlexandro/BPCHub.git"
+  },
+  "author": "Bartosz Pierdolny (parashnokwtf@gmail.com)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/DonAlexandro/BPCHub/issues"
+  },
+  "homepage": "https://github.com/DonAlexandro/BPCHub#readme",
+  "devDependencies": {
+    "husky": "^8.0.0",
+    "prettier": "3.0.0"
+  }
+}
