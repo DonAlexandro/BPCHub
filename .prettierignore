@@ -1,0 +1,12 @@
+.husky
+.next
+node_modules
+public
+.env
+package-lock.json
+package.json
+dist
+config
+database
+public
+server

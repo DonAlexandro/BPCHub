@@ -1,0 +1,13 @@
+#!/usr/bin/env sh
+. "$(dirname -- "$0")/_/husky.sh"
+
+runAllTests() {
+  commandToExecute="npm test"
+
+  pushd ./scrapper 1>/dev/null || exit 1
+  eval "$commandToExecute"
+  popd || exit 1
+}
+
+runAllTests
+npm run format
