@@ -1,7 +1,8 @@
 import { StyledComponentsRegistry } from '@/lib/antd';
 import { theme } from '@/theme/override';
-import { ConfigProvider } from 'antd';
+import { ConfigProvider, Layout } from 'antd';
 import type { Metadata } from 'next';
+import { Navbar } from '@/components/navbar';
 
 import 'antd/dist/reset.css';
 import './globals.css';
@@ -16,7 +17,12 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     <html lang="uk-UA">
       <body>
         <StyledComponentsRegistry>
-          <ConfigProvider theme={theme}>{children}</ConfigProvider>
+          <ConfigProvider theme={theme}>
+            <Layout>
+              <Navbar />
+              {children}
+            </Layout>
+          </ConfigProvider>
         </StyledComponentsRegistry>
       </body>
     </html>

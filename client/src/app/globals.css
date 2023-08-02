@@ -4,13 +4,24 @@ body {
   background-color: #f4f4f4;
 }
 
+a {
+  color: #3c3b3b !important;
+}
+
+a:hover {
+  color: #2ebaae !important;
+}
+
 .ant-btn {
+  box-shadow: none !important;
+}
+
+.ant-btn-large {
   font-weight: 800 !important;
   text-transform: uppercase;
   letter-spacing: 0.25em;
   height: 4.8125em !important;
   padding: 0 35px !important;
-  box-shadow: none !important;
 }
 
 .ant-typography {
