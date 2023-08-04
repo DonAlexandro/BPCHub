@@ -2,6 +2,15 @@
 
 Всі важливі зміни в цьому проєкті будуть задокументовані в цьому файлі.
 
+## [0.0.3] - 2023-08-02
+
+### Added
+
+#### Client
+
+- Mobile version of the header
+- Mobile version of article card
+
 ## [0.0.2] - 2023-08-02
 
 ### Added

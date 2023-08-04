@@ -6,3 +6,4 @@ export const headingLink: React.CSSProperties = {
 };
 
 export const colorBorder = 'rgba(160, 160, 160, 0.3)';
+export const colorTextSecondary = '#646464';
