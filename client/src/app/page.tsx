@@ -1,79 +1,45 @@
-import Image from 'next/image';
-import styles from './page.module.css';
+'use client';
+import { Ads, Article, HeaderComponent, Pagination, Footer } from '@/components';
+import { Col, Divider, Grid, Row } from 'antd';
+
+const { useBreakpoint } = Grid;
 
 export default function Home() {
+  const screens = useBreakpoint();
+
   return (
-    <main className={styles.main}>
-      <div className={styles.description}>
-        <p>
-          Get started by editing&nbsp;
-          <code className={styles.code}>src/app/page.tsx</code>
-        </p>
-        <div>
-          <a
-            href="https://vercel.com?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            By{' '}
-            <Image src="/vercel.svg" alt="Vercel Logo" className={styles.vercelLogo} width={100} height={24} priority />
-          </a>
-        </div>
-      </div>
-
-      <div className={styles.center}>
-        <Image className={styles.logo} src="/next.svg" alt="Next.js Logo" width={180} height={37} priority />
-      </div>
-
-      <div className={styles.grid}>
-        <a
-          href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Docs <span>-&gt;</span>
-          </h2>
-          <p>Find in-depth information about Next.js features and API.</p>
-        </a>
-
-        <a
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Learn <span>-&gt;</span>
-          </h2>
-          <p>Learn about Next.js in an interactive course with&nbsp;quizzes!</p>
-        </a>
-
-        <a
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Templates <span>-&gt;</span>
-          </h2>
-          <p>Explore the Next.js 13 playground.</p>
-        </a>
-
-        <a
-          href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Deploy <span>-&gt;</span>
-          </h2>
-          <p>Instantly deploy your Next.js site to a shareable URL with Vercel.</p>
-        </a>
-      </div>
-    </main>
+    <>
+      {!screens.xl && <HeaderComponent />}
+      <Row gutter={48} style={{ marginRight: 0 }}>
+        <Col xl={{ span: 17, order: 2 }} md={24} sm={24} xs={24} style={{ paddingRight: 0 }}>
+          <Article
+            title="І є держава Україна, і є її нескорений народ!"
+            image="https://www.batk.nubip.edu.ua/images/News/News2023_1/A271/1.jpg"
+            description="Україна вдруге відзначає День Української Державності 28 липня. Відзначає в час неймовірно жорстокої війни —
+          на вісімнадцятому її місяці, після восьми років бойових дій на Донбасі, у протистоянні з московською ордою, що
+          триває упродовж кількох століть."
+            category="Інші події"
+            views="123"
+          />
+          <Article
+            title="Формуємо цифрове майбутнє разом: німецько-українська співпраця у сфері вищої освіти"
+            image="https://www.batk.nubip.edu.ua/images/News/News2023_1/A270/1.jpg"
+            description='З 16.07.2023 по 23.07.2023 в Університеті прикладних наук Вайєнштефан -Тріздорф (HSWT) в рамках проекту DAAD 57649162 "Поглиблення цифровізації українських аграрних університетів" для викладачів та студентів українських партнерських університетів та коледжів було проведено літню школу.'
+            category="Інші події"
+            views="321"
+          />
+          <Pagination />
+        </Col>
+        <Col xl={{ span: 7, order: 1 }} md={24} sm={24} xs={24}>
+          <div style={{ padding: screens.lg ? 0 : '0 24px' }}>
+            {screens.xl && <HeaderComponent />}
+            <Divider style={{ margin: '48px 0 24px 0' }} />
+            <Ads />
+            <Divider style={{ margin: '24px 0 48px 0' }} />
+            <Footer />
+          </div>
+        </Col>
+      </Row>
+    </>
   );
 }
