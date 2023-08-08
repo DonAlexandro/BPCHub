@@ -14,4 +14,4 @@ export const otherRoutes = {
   },
 };
 
-export const routes = Object.assign(navbarRoutes, otherRoutes);
+export const routes = { ...navbarRoutes, ...otherRoutes };

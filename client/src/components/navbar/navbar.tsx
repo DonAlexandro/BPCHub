@@ -1,6 +1,6 @@
 'use client';
 import React from 'react';
-import { Button, Layout } from 'antd';
+import { Button, Layout, Grid } from 'antd';
 import Link from 'next/link';
 import { routes } from '@/shared/constants';
 import { MenuOutlined } from '@ant-design/icons';
@@ -9,27 +9,33 @@ import { colorBorder, headingLink } from '@/theme';
 import { NavbarDrawer } from './navbar-drawer';
 
 const { Header } = Layout;
+const { useBreakpoint } = Grid;
 
 export const Navbar: React.FC = () => {
   const [isDrawerOpened, { toggle: toggleDrawer }] = useBoolean();
+  const screens = useBreakpoint();
 
   return (
     <>
       <Header
         style={{
-          height: '45px',
+          position: 'sticky',
+          top: 0,
+          zIndex: 1,
+          height: screens.md ? '56px' : '45px',
           lineHeight: '45px',
           padding: 0,
           borderBottom: `1px solid ${colorBorder}`,
           display: 'flex',
           justifyContent: 'space-between',
+          alignItems: 'center',
         }}
       >
         <Link
           href={routes.home.path}
           style={{
             ...headingLink,
-            paddingLeft: 16,
+            paddingLeft: screens.md ? 24 : 16,
           }}
         >
           Бережанський Коледж

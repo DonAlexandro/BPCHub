@@ -2,6 +2,25 @@
 
 Всі важливі зміни в цьому проєкті будуть задокументовані в цьому файлі.
 
+## [0.0.4] - 2023-08-08
+
+### Added
+
+#### Client
+
+- Sticky header
+- Desktop version of the website
+- Pagination
+- Section with ads
+- Footer
+
+### Fixed
+
+#### Client
+
+- Adjusted the width and the height of mobile article image
+- Moved article related code to separate component
+
 ## [0.0.3] - 2023-08-02
 
 ### Added

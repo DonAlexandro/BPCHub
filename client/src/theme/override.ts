@@ -1,9 +1,5 @@
 import type { ThemeConfig } from 'antd';
-import { Raleway, Source_Sans_3 } from 'next/font/google';
-import { colorBorder, colorTextSecondary } from '.';
-
-const raleway = Raleway({ subsets: ['latin', 'cyrillic-ext'] });
-const sourceSans3 = Source_Sans_3({ subsets: ['latin', 'cyrillic-ext'] });
+import { colorBorder, colorTextSecondary, mainFont, secondaryFont } from '.';
 
 export const theme: ThemeConfig = {
   token: {
@@ -11,7 +7,7 @@ export const theme: ThemeConfig = {
     colorPrimary: '#2ebaae',
     colorTextSecondary,
     colorText: '#3c3b3b',
-    fontFamily: raleway.style.fontFamily,
+    fontFamily: mainFont.style.fontFamily,
     colorBorder,
   },
   components: {
@@ -26,7 +22,7 @@ export const theme: ThemeConfig = {
       colorBgHeader: '#fff',
     },
     Input: {
-      fontFamily: sourceSans3.style.fontFamily,
+      fontFamily: secondaryFont.style.fontFamily,
     },
   },
 };
