@@ -2,6 +2,18 @@
 
 Всі важливі зміни в цьому проєкті будуть задокументовані в цьому файлі.
 
+## [0.0.5] - 2023-08-18
+
+### Added
+
+#### Scrapper
+
+- The initial fully tested implementation of scrapper
+
+#### Client
+
+- Websocket connection with the scrapper to update new articles without page reloading
+
 ## [0.0.4] - 2023-08-08
 
 ### Added
