@@ -44,6 +44,9 @@
     },
     "content": {
       "type": "richtext"
+    },
+    "externalPublishDate": {
+      "type": "datetime"
     }
   }
 }
