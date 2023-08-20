@@ -1,4 +1,5 @@
 'use client';
+
 import { Col, Divider, Grid, Row } from 'antd';
 import React, { PropsWithChildren } from 'react';
 import { Ads, Footer, HeaderComponent } from '..';

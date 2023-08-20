@@ -2,6 +2,15 @@
 
 Всі важливі зміни в цьому проєкті будуть задокументовані в цьому файлі.
 
+## [0.0.6] - 2023-08-20
+
+### Added
+
+#### Client
+
+- Redux + Redux Toolkit + RTK Query
+- Articles fetching from the Strapi API
+
 ## [0.0.5] - 2023-08-18
 
 ### Added

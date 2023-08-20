@@ -1,11 +1,14 @@
 'use client';
 import { Article, Pagination } from '@/components';
 import { HomeLayout } from '@/components/layouts';
+import { articleAPI } from '@/store/api';
 import { config } from '@/utils';
 import { useEffect } from 'react';
 import { io } from 'socket.io-client';
 
 export default function Home() {
+  const { data, isLoading } = articleAPI.useFindAllQuery({ pagination: { page: 1, pageSize: 6 } });
+
   useEffect(() => {
     const socket = io(config.SCRAPPER_URL, {
       transports: ['websocket'],
@@ -26,22 +29,18 @@ export default function Home() {
 
   return (
     <HomeLayout>
-      <Article
-        title="І є держава Україна, і є її нескорений народ!"
-        image="https://www.batk.nubip.edu.ua/images/News/News2023_1/A271/1.jpg"
-        description="Україна вдруге відзначає День Української Державності 28 липня. Відзначає в час неймовірно жорстокої війни —
-          на вісімнадцятому її місяці, після восьми років бойових дій на Донбасі, у протистоянні з московською ордою, що
-          триває упродовж кількох століть."
-        category="Інші події"
-        views="123"
-      />
-      <Article
-        title="Формуємо цифрове майбутнє разом: німецько-українська співпраця у сфері вищої освіти"
-        image="https://www.batk.nubip.edu.ua/images/News/News2023_1/A270/1.jpg"
-        description='З 16.07.2023 по 23.07.2023 в Університеті прикладних наук Вайєнштефан -Тріздорф (HSWT) в рамках проекту DAAD 57649162 "Поглиблення цифровізації українських аграрних університетів" для викладачів та студентів українських партнерських університетів та коледжів було проведено літню школу.'
-        category="Інші події"
-        views="321"
-      />
+      {data?.data.map((article) => (
+        <Article
+          categoryId={article.attributes.category.data.id}
+          id={article.id}
+          key={article.id}
+          title={article.attributes.title}
+          image={article.attributes.image}
+          description={article.attributes.description}
+          category={article.attributes.category.data.attributes.title}
+          views={article.attributes.views}
+        />
+      ))}
       <Pagination />
     </HomeLayout>
   );
