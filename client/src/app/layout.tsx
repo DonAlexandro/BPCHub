@@ -2,8 +2,8 @@ import { StyledComponentsRegistry } from '@/lib/antd';
 import { theme } from '@/theme/override';
 import { ConfigProvider, Layout } from 'antd';
 import type { Metadata } from 'next';
-import { Navbar } from '@/components/navbar';
-import { ContentWrapper } from '@/components/';
+import { ContentWrapper, Navbar } from '@/components/';
+import { ReduxProvider } from '@/store/provider';
 
 import 'antd/dist/reset.css';
 import './globals.css';
@@ -17,14 +17,16 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="uk-UA">
       <body>
-        <StyledComponentsRegistry>
-          <ConfigProvider theme={theme}>
-            <Layout>
-              <Navbar />
-              <ContentWrapper>{children}</ContentWrapper>
-            </Layout>
-          </ConfigProvider>
-        </StyledComponentsRegistry>
+        <ReduxProvider>
+          <StyledComponentsRegistry>
+            <ConfigProvider theme={theme}>
+              <Layout>
+                <Navbar />
+                <ContentWrapper>{children}</ContentWrapper>
+              </Layout>
+            </ConfigProvider>
+          </StyledComponentsRegistry>
+        </ReduxProvider>
       </body>
     </html>
   );

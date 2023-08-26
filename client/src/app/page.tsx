@@ -1,11 +1,24 @@
 'use client';
 import { Article, Pagination } from '@/components';
 import { HomeLayout } from '@/components/layouts';
+import { useAppDispatch } from '@/hooks';
+import { articleAPI } from '@/store/api';
 import { config } from '@/utils';
-import { useEffect } from 'react';
+import { Empty, Result } from 'antd';
+import { useCallback, useEffect, useState } from 'react';
 import { io } from 'socket.io-client';
 
 export default function Home() {
+  const dispatch = useAppDispatch();
+
+  const [pagination, setPagination] = useState({ page: 1, pageSize: 6 });
+
+  const [findAll, { data, isError, isLoading }] = articleAPI.useLazyFindAllQuery();
+
+  useEffect(() => {
+    findAll({ pagination });
+  }, [pagination, findAll]);
+
   useEffect(() => {
     const socket = io(config.SCRAPPER_URL, {
       transports: ['websocket'],
@@ -16,33 +29,55 @@ export default function Home() {
     });
 
     socket.on('articles', (articles) => {
-      console.log(articles);
+      if (articles.length) {
+        findAll({ pagination });
+      }
     });
 
     return () => {
       socket.disconnect();
     };
-  }, []);
+  }, [pagination, dispatch, findAll]);
 
-  return (
-    <HomeLayout>
-      <Article
-        title="І є держава Україна, і є її нескорений народ!"
-        image="https://www.batk.nubip.edu.ua/images/News/News2023_1/A271/1.jpg"
-        description="Україна вдруге відзначає День Української Державності 28 липня. Відзначає в час неймовірно жорстокої війни —
-          на вісімнадцятому її місяці, після восьми років бойових дій на Донбасі, у протистоянні з московською ордою, що
-          триває упродовж кількох століть."
-        category="Інші події"
-        views="123"
-      />
-      <Article
-        title="Формуємо цифрове майбутнє разом: німецько-українська співпраця у сфері вищої освіти"
-        image="https://www.batk.nubip.edu.ua/images/News/News2023_1/A270/1.jpg"
-        description='З 16.07.2023 по 23.07.2023 в Університеті прикладних наук Вайєнштефан -Тріздорф (HSWT) в рамках проекту DAAD 57649162 "Поглиблення цифровізації українських аграрних університетів" для викладачів та студентів українських партнерських університетів та коледжів було проведено літню школу.'
-        category="Інші події"
-        views="321"
-      />
-      <Pagination />
-    </HomeLayout>
-  );
+  const render = useCallback(() => {
+    if (isLoading) {
+      return [1, 2, 3].map((key) => <Article loading key={key} />);
+    }
+
+    if (isError) {
+      return (
+        // TODO: Move this to separate component in order to reuse it
+        <Result
+          status="500"
+          title="На жаль, сталася помилка при завантаженні статей"
+          subTitle="Повторіть спробу через деякий час, або повідомте, будь ласка, нам про проблему, якщо вона не зникає"
+        />
+      );
+    }
+
+    if (!data?.data.length) {
+      // TODO: Move this to separate component in order to reuse it
+      return <Empty description="Статей поки що немає" />;
+    }
+
+    return (
+      <>
+        {data?.data.map((article) => (
+          <Article
+            categoryId={article.attributes.category.data.id}
+            id={article.id}
+            key={article.id}
+            title={article.attributes.title}
+            image={article.attributes.image}
+            description={article.attributes.description}
+            category={article.attributes.category.data.attributes.title}
+            views={article.attributes.views}
+          />
+        ))}
+        <Pagination configuration={{ pagination, setPagination, totalPages: data?.meta.pagination?.pageCount }} />
+      </>
+    );
+  }, [isLoading, data, pagination, isError]);
+
+  return <HomeLayout>{render()}</HomeLayout>;
 }

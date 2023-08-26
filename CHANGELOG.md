@@ -2,6 +2,27 @@
 
 Всі важливі зміни в цьому проєкті будуть задокументовані в цьому файлі.
 
+## [0.0.7] - 2023-08-26
+
+### Added
+
+#### Client
+
+- Pagination to the home page
+- Loading indicator for articles
+- Illustration if error happened
+- Real-time articles update using websockets
+- Illustration if there're no articles at all in DB yet
+
+## [0.0.6] - 2023-08-20
+
+### Added
+
+#### Client
+
+- Redux + Redux Toolkit + RTK Query
+- Articles fetching from the Strapi API
+
 ## [0.0.5] - 2023-08-18
 
 ### Added

@@ -8,11 +8,9 @@ import { TagService } from 'src/tag';
 
 @Injectable()
 export class ScrapeTemplate {
-  constructor(
-    private readonly categoryService: CategoryService,
-    private readonly tagService: TagService,
-  ) {}
+  constructor(private readonly categoryService: CategoryService, private readonly tagService: TagService) {}
 
+  // TODO: Move this method to the tagsService, as it's not the task of the scrapping
   /**
    * This function returns required by Strapi object to create a relation between tags and articles
    * Read more in the official documentaion: https://docs.strapi.io/dev-docs/api/rest/relations.
@@ -34,10 +32,13 @@ export class ScrapeTemplate {
         }),
       );
 
+      // TODO: Create a new util called RelationFabric and this object to connect method out there
+      // Reason: if Strapi dev team will ever deside to change the API of relations creation, we'll have 1 place to edit
       return { connect: tagIds };
     }
   }
 
+  // TODO: Move this method to the categoryService, as it's not the task of the scrapping
   /**
    * This function returns required by Strapi object to create a relation between category and articles
    * Read more in the official documentaion: https://docs.strapi.io/dev-docs/api/rest/relations
@@ -51,6 +52,7 @@ export class ScrapeTemplate {
       category = await this.categoryService.create({ title: parsedCategory });
     }
 
+    // TODO: Create a new util called RelationFabric and this object to connect method out there
     return { connect: [category.id] };
   }
 
