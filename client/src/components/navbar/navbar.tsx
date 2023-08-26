@@ -1,5 +1,5 @@
 'use client';
-import React from 'react';
+import React, { useMemo } from 'react';
 import { Button, Layout, Grid } from 'antd';
 import Link from 'next/link';
 import { routes } from '@/shared/constants';
@@ -12,8 +12,9 @@ const { Header } = Layout;
 const { useBreakpoint } = Grid;
 
 export const Navbar: React.FC = () => {
-  const [isDrawerOpened, { toggle: toggleDrawer }] = useBoolean();
   const screens = useBreakpoint();
+
+  const [isDrawerOpened, { toggle: toggleDrawer }] = useBoolean();
 
   return (
     <>

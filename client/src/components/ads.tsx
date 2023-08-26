@@ -20,7 +20,7 @@ export const Ads = () => {
               </Link>
             }
             description={
-              <Text type="secondary" style={{ fontSize: '10px !important' }}>
+              <Text type="secondary" style={{ fontSize: 10 }}>
                 20 червня 2023
               </Text>
             }

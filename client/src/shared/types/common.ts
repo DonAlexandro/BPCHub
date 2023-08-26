@@ -5,7 +5,7 @@ export interface PaginationDTO {
   pageSize: number;
 }
 
-interface Pagination extends PaginationDTO {
+export interface Pagination extends PaginationDTO {
   pageCount: number;
   total: number;
 }
