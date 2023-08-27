@@ -8,7 +8,10 @@ import { TagService } from 'src/tag';
 
 @Injectable()
 export class ScrapeTemplate {
-  constructor(private readonly categoryService: CategoryService, private readonly tagService: TagService) {}
+  constructor(
+    private readonly categoryService: CategoryService,
+    private readonly tagService: TagService,
+  ) {}
 
   // TODO: Move this method to the tagsService, as it's not the task of the scrapping
   /**
