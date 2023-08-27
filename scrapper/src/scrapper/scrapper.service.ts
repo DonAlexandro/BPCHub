@@ -1,4 +1,5 @@
 import { Injectable } from '@nestjs/common';
+import { Cron, CronExpression } from '@nestjs/schedule';
 import { ScrapeTemplate } from './templates';
 import { ArticleService } from 'src/article';
 import { ScrapperGateway } from './scrapper.gateway';
@@ -11,6 +12,7 @@ export class ScrapperService {
     private readonly scrapperGateway: ScrapperGateway,
   ) {}
 
+  @Cron(CronExpression.EVERY_DAY_AT_10AM)
   async scrape() {
     const parsedArticles = await this.scrapeTemplate.parseArticles();
 

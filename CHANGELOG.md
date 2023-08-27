@@ -2,6 +2,14 @@
 
 Всі важливі зміни в цьому проєкті будуть задокументовані в цьому файлі.
 
+## [0.0.8] - 2023-08-27
+
+### Added
+
+#### Scrapper
+
+- CRON to run articles scrapping automatically every day at 10AM
+
 ## [0.0.7] - 2023-08-26
 
 ### Added
