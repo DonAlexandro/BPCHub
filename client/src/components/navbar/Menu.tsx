@@ -1,17 +1,18 @@
 'use client';
-import { navbarRoutes } from '@/shared/constants';
-import { colorBorder, headingLink } from '@/theme';
-import { Drawer } from 'antd';
-import Link from 'next/link';
-import React from 'react';
-import { SearchForm } from './search-form';
 
-interface NavbarDrawerProps {
+import { navbarRoutes } from '../../shared/constants';
+import { colorBorder } from '../../theme';
+import { Drawer } from 'antd';
+import React from 'react';
+import { SearchForm } from './Search';
+import Styled from './navbar.styled';
+
+interface MenuProps {
   toggleDrawer: () => void;
   isDrawerOpened: boolean;
 }
 
-export const NavbarDrawer: React.FC<NavbarDrawerProps> = ({ toggleDrawer, isDrawerOpened }) => {
+export const Menu: React.FC<MenuProps> = ({ toggleDrawer, isDrawerOpened }) => {
   return (
     <Drawer
       title={<SearchForm />}
@@ -24,19 +25,13 @@ export const NavbarDrawer: React.FC<NavbarDrawerProps> = ({ toggleDrawer, isDraw
       headerStyle={{ borderBottom: `1px solid ${colorBorder}` }}
     >
       {Object.values(navbarRoutes).map((route) => (
-        <Link
-          style={{
-            ...headingLink,
-            width: '100%',
-            display: 'inline-block',
-            borderBottom: `1px dotted ${colorBorder}`,
-            padding: '24px 0',
-          }}
+        <Styled.MenuLink
+          $heading
           key={route.path}
           href={route.path}
         >
           {route.title}
-        </Link>
+        </Styled.MenuLink>
       ))}
     </Drawer>
   );
