@@ -4,8 +4,8 @@ const nextConfig = {
     domains: ['www.batk.nubip.edu.ua', 'placehold.co'],
   },
   compiler: {
-    styledComponents: true
-  }
+    styledComponents: true,
+  },
 };
 
 module.exports = nextConfig;

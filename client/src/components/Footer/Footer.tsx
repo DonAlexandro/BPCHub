@@ -11,9 +11,7 @@ export const Footer = () => {
         <Styled.SocialLink href="https://www.facebook.com/AgroKolegeBerezhany/">
           <FacebookFilled />
         </Styled.SocialLink>
-        <Styled.SocialLink
-          href="https://www.youtube.com/channel/UC03sYf1Ldmy-P5P6VnOGSXA/featured?view_as=subscriber"
-        >
+        <Styled.SocialLink href="https://www.youtube.com/channel/UC03sYf1Ldmy-P5P6VnOGSXA/featured?view_as=subscriber">
           <YoutubeFilled />
         </Styled.SocialLink>
       </Space>

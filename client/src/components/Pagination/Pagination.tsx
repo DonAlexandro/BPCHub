@@ -30,10 +30,7 @@ export const Pagination: FC<PaginationProps> = ({ setPagination, pagination, tot
   };
 
   return (
-    <Styled.Pagination
-      direction={screens.md ? 'horizontal' : 'vertical'}
-      size={16}
-    >
+    <Styled.Pagination direction={screens.md ? 'horizontal' : 'vertical'} size={16}>
       <Button block disabled={pagination.page === 1} onClick={handlePreviousPageClick}>
         Попередня сторінка
       </Button>

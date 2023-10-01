@@ -25,11 +25,7 @@ export const Menu: React.FC<MenuProps> = ({ toggleDrawer, isDrawerOpened }) => {
       headerStyle={{ borderBottom: `1px solid ${colorBorder}` }}
     >
       {Object.values(navbarRoutes).map((route) => (
-        <Styled.MenuLink
-          $heading
-          key={route.path}
-          href={route.path}
-        >
+        <Styled.MenuLink $heading key={route.path} href={route.path}>
           {route.title}
         </Styled.MenuLink>
       ))}

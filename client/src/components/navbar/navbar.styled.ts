@@ -1,15 +1,15 @@
-import {ButtonProps, Layout} from 'antd'
+import { ButtonProps, Layout } from 'antd';
 import { FC, PropsWithChildren } from 'react';
 import styled from 'styled-components';
 import { colorBorder } from '../../theme';
 import { breakpoints } from '../../shared/constants';
 import { LinkProps } from '../Typography';
-import ButtonStyled from '../Button/button.styled'
-import Typography from '../Typography/typography.styled'
+import ButtonStyled from '../Button/button.styled';
+import Typography from '../Typography/typography.styled';
 
-const {Header} = Layout
-const {Button} = ButtonStyled
-const {Link} = Typography
+const { Header } = Layout;
+const { Button } = ButtonStyled;
+const { Link } = Typography;
 
 const Navbar = styled(Header)<FC<PropsWithChildren>>`
   && {
@@ -28,7 +28,7 @@ const Navbar = styled(Header)<FC<PropsWithChildren>>`
       height: 56px;
     }
   }
-`
+`;
 
 const Brand = styled(Link)<LinkProps>`
   padding-left: 16px;
@@ -36,7 +36,7 @@ const Brand = styled(Link)<LinkProps>`
   @media screen and (min-width: ${breakpoints.md}) {
     padding-left: 24px;
   }
-`
+`;
 
 const Burger = styled(Button)<ButtonProps>`
   && {
@@ -49,15 +49,15 @@ const Burger = styled(Button)<ButtonProps>`
       border-color: ${colorBorder} !important;
     }
   }
-`
+`;
 
 const MenuLink = styled(Link)<LinkProps>`
   width: 100%;
   display: inline-block;
   border-bottom: 1px dotted ${colorBorder};
   padding: 24px 0;
-`
+`;
 
-const Styled = {Navbar, Brand, Burger, MenuLink}
+const Styled = { Navbar, Brand, Burger, MenuLink };
 
-export default Styled
+export default Styled;

@@ -1,7 +1,7 @@
-'use client'
+'use client';
 
-import styled from "styled-components"
-import { breakpoints } from "../../shared/constants"
+import styled from 'styled-components';
+import { breakpoints } from '../../shared/constants';
 
 const Header = styled.div`
   text-align: center;
@@ -13,8 +13,8 @@ const Header = styled.div`
     padding: 0;
     margin-bottom: 0;
   }
-`
+`;
 
-const Styled = {Header}
+const Styled = { Header };
 
-export default Styled
+export default Styled;

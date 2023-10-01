@@ -2,6 +2,20 @@
 
 Всі важливі зміни в цьому проєкті будуть задокументовані в цьому файлі.
 
+## [0.0.9] - 2023-10-01
+
+### Added
+
+#### Client
+
+- Documentation for all components. It was done by using Storybook
+
+### Changed
+
+#### Client
+
+- The way we're styling all components. Before it was done by using CSS files, now it's all done by using styled-components
+
 ## [0.0.8] - 2023-08-27
 
 ### Added

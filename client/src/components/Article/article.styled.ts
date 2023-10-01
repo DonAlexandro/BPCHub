@@ -1,9 +1,9 @@
-import { Card, CardProps, Space, SpaceProps } from "antd"
-import styled from "styled-components"
-import { colorBorder, colorSecondary } from "../../theme"
-import { breakpoints } from "../../shared/constants"
-import Link, { LinkProps } from "next/link"
-import { config } from "../../utils"
+import { Card, CardProps, Space, SpaceProps } from 'antd';
+import styled from 'styled-components';
+import { colorBorder, colorSecondary } from '../../theme';
+import { breakpoints } from '../../shared/constants';
+import Link, { LinkProps } from 'next/link';
+import { config } from '../../utils';
 
 const Article = styled(Card)<CardProps>`
   margin-bottom: 32px;
@@ -42,12 +42,12 @@ const Article = styled(Card)<CardProps>`
   & .ant-card-body {
     padding: 0;
   }
-`
+`;
 
 type ArticleImageProps = {
-  $image?: string
-  $loading?: boolean
-}
+  $image?: string;
+  $loading?: boolean;
+};
 
 const Image = styled(Link)<LinkProps & ArticleImageProps>`
   display: inline-block;
@@ -57,20 +57,23 @@ const Image = styled(Link)<LinkProps & ArticleImageProps>`
   background-position: center;
   margin: 0 0 24px 0;
   height: 152px;
-  background-image: ${props => props.$loading ? 'url(https://placehold.co/850x345?text=Завантаження...&font=roboto)' : `url(${config.BPC_URL + props.$image})`};
+  background-image: ${(props) =>
+    props.$loading
+      ? 'url(https://placehold.co/850x345?text=Завантаження...&font=roboto)'
+      : `url(${config.BPC_URL + props.$image})`};
 
   @media screen and (min-width: ${breakpoints.md}) {
     height: 345px;
     margin: 48px 0;
   }
-`
+`;
 
 const Views = styled.span`
   font-size: 10px;
   text-transform: uppercase;
   letter-spacing: 0.25em;
   color: ${colorSecondary};
-`
+`;
 
 const Meta = styled(Space)<SpaceProps>`
   width: 100%;
@@ -81,8 +84,8 @@ const Meta = styled(Space)<SpaceProps>`
   @media screen and (min-width: ${breakpoints.md}) {
     justify-content: flex-end;
   }
-`
+`;
 
-const Styled = {Article, Image, Views, Meta}
+const Styled = { Article, Image, Views, Meta };
 
-export default Styled
+export default Styled;

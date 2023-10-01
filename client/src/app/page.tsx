@@ -73,7 +73,11 @@ export default function Home() {
             views={article.attributes.views}
           />
         ))}
-        <Pagination pagination={pagination} setPagination={setPagination} totalPages={data?.meta.pagination?.pageCount} />
+        <Pagination
+          pagination={pagination}
+          setPagination={setPagination}
+          totalPages={data?.meta.pagination?.pageCount}
+        />
       </>
     );
   }, [isLoading, data, pagination, isError]);

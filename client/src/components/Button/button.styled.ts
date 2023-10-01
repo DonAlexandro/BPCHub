@@ -1,7 +1,7 @@
-'use client'
+'use client';
 
-import { Button as AntButton, ButtonProps } from 'antd'
-import styled, { css } from 'styled-components'
+import { Button as AntButton, ButtonProps } from 'antd';
+import styled, { css } from 'styled-components';
 
 const Button = styled(AntButton)<ButtonProps>`
   && {
@@ -21,8 +21,8 @@ const Button = styled(AntButton)<ButtonProps>`
       background: transparent;
     }
   }
-`
+`;
 
-const Styled = {Button}
+const Styled = { Button };
 
-export default Styled
+export default Styled;

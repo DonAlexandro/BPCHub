@@ -10,8 +10,8 @@ export const headingLink: React.CSSProperties = {
 export const colorPrimary = '#2ebaae';
 export const colorSecondary = '#646464';
 export const colorBorder = 'rgba(160, 160, 160, 0.3)';
-export const paragraphColor = 'rgb(100, 100, 100)'
-export const colorMuted = 'rgb(170, 170, 170)'
+export const paragraphColor = 'rgb(100, 100, 100)';
+export const colorMuted = 'rgb(170, 170, 170)';
 
 export const secondaryLink: React.CSSProperties = {
   color: colorSecondary,

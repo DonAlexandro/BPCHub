@@ -6,7 +6,7 @@ import React, { useMemo } from 'react';
 import { routes } from '../../shared/constants';
 import { Nullable } from '../../shared/types';
 import { Button } from '../Button';
-import { Text, Title, Link } from '../Typography'
+import { Text, Title, Link } from '../Typography';
 import Styled from './article.styled';
 
 const { useBreakpoint } = Grid;
@@ -43,15 +43,20 @@ export const Article: React.FC<Partial<ArticleProps>> = ({
   return (
     <Styled.Article
       title={
-        loading ? <Skeleton.Button block active /> :
+        loading ? (
+          <Skeleton.Button block active />
+        ) : (
           <Link href={articleUrl}>
             <Title
               level={2}
               style={{
                 textAlign: screens.lg ? 'left' : 'center',
               }}
-            >{title}</Title>
+            >
+              {title}
+            </Title>
           </Link>
+        )
       }
     >
       <div style={{ padding: screens.md ? '0 48px' : 0 }}>
@@ -85,9 +90,7 @@ export const Article: React.FC<Partial<ArticleProps>> = ({
             </Col>
             <Col md={{ span: 12, order: 1 }} sm={24} xs={24}>
               <Link href={articleUrl}>
-                <Button block={!screens.md}>
-                  Читати далі
-                </Button>
+                <Button block={!screens.md}>Читати далі</Button>
               </Link>
             </Col>
           </Row>

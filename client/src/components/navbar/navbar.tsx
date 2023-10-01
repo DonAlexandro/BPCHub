@@ -14,13 +14,8 @@ export const Navbar: React.FC = () => {
   return (
     <>
       <Styled.Navbar>
-        <Brand href={routes.home.path}>
-          Бережанський Коледж
-        </Brand>
-        <Styled.Burger
-          onClick={toggleDrawer}
-          icon={<MenuOutlined />}
-        />
+        <Brand href={routes.home.path}>Бережанський Коледж</Brand>
+        <Styled.Burger onClick={toggleDrawer} icon={<MenuOutlined />} />
       </Styled.Navbar>
       <Menu toggleDrawer={toggleDrawer} isDrawerOpened={isDrawerOpened} />
     </>
