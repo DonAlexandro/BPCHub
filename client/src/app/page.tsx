@@ -1,6 +1,6 @@
 'use client';
 import { Article, Pagination } from '@/components';
-import { HomeLayout } from '@/components/layouts';
+import { HomeLayout } from '@/layouts';
 import { useAppDispatch } from '@/hooks';
 import { articleAPI } from '@/store/api';
 import { config } from '@/utils';
@@ -56,7 +56,6 @@ export default function Home() {
     }
 
     if (!data?.data.length) {
-      // TODO: Move this to separate component in order to reuse it
       return <Empty description="Статей поки що немає" />;
     }
 
@@ -74,7 +73,11 @@ export default function Home() {
             views={article.attributes.views}
           />
         ))}
-        <Pagination configuration={{ pagination, setPagination, totalPages: data?.meta.pagination?.pageCount }} />
+        <Pagination
+          pagination={pagination}
+          setPagination={setPagination}
+          totalPages={data?.meta.pagination?.pageCount}
+        />
       </>
     );
   }, [isLoading, data, pagination, isError]);
