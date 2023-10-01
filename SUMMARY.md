@@ -2,9 +2,9 @@
 
 ## Documentation
 
-* [Architecture](README.md)
-  * [Overview](documentation/architecture/overview.md)
+* [🧱 Architecture](README.md)
+  * [🚁 Overview](documentation/architecture/overview.md)
 
 ## Other
 
-* [Changelog](other/CHANGELOG.md)
+* [📄 Changelog](other/changelog.md)

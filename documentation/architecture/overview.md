@@ -2,7 +2,7 @@
 description: This document explains how the app works from the "helicopter" view
 ---
 
-# Overview
+# 🚁 Overview
 
 ### :bar\_chart: Diagram
 
