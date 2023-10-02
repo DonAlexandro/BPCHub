@@ -4,7 +4,7 @@ import { ScrapperController } from './scrapper.controller';
 import { CategoryService } from 'src/category';
 import { ScrapeTemplate } from './templates';
 import { TagService } from 'src/tag';
-import { ArticleService } from 'src/article';
+import { ArticleService } from 'src/contexts/article';
 import { ScrapperGateway } from './scrapper.gateway';
 
 @Module({

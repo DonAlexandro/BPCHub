@@ -1,13 +1,17 @@
 import { Injectable } from '@nestjs/common';
 import { Cron, CronExpression } from '@nestjs/schedule';
 import { ScrapeTemplate } from './templates';
-import { ArticleService } from 'src/article';
+import { ArticleService } from 'src/contexts/article';
 import { ScrapperGateway } from './scrapper.gateway';
+import { TagService } from 'src/contexts/tag';
+import { CategoryService } from 'src/contexts/category';
 
 @Injectable()
 export class ScrapperService {
   constructor(
     private readonly scrapeTemplate: ScrapeTemplate,
+    private readonly tagService: TagService,
+    private readonly categoryService: CategoryService,
     private readonly articleService: ArticleService,
     private readonly scrapperGateway: ScrapperGateway,
   ) {}
@@ -21,10 +25,10 @@ export class ScrapperService {
         const existingArticle = await this.articleService.findByTitle(article.title);
 
         if (!existingArticle) {
-          const categoryConnect = await this.scrapeTemplate.createCategoryConnect(article.category);
-          const tagsConnect = await this.scrapeTemplate.createTagsConnect(article.tags);
+          const categoryConnection = await this.categoryService.createCategoryConnection(article.category);
+          const tagsConnection = await this.tagService.createTagsConnection(article.tags);
 
-          const newArticle = { ...article, category: categoryConnect, tags: tagsConnect };
+          const newArticle = { ...article, category: categoryConnection, tags: tagsConnection };
 
           return this.articleService.create(newArticle);
         }
