@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { SubscribeMessage, WebSocketGateway, WebSocketServer } from '@nestjs/websockets';
 import { Server } from 'socket.io';
-import { ExtendedArticle } from 'src/article';
+import { ExtendedArticle } from 'src/contexts/article';
 import { SingleResponse } from 'src/shared/types';
 
 @WebSocketGateway()

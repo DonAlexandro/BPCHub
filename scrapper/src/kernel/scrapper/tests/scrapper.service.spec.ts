@@ -1,27 +1,40 @@
 import { Test } from '@nestjs/testing';
 import { faker } from '@faker-js/faker';
 import { ScrapeTemplate } from '../templates';
-import { ArticleService } from 'src/article';
+import { ArticleService } from 'src/contexts/article';
 import { ScrapperGateway } from '../scrapper.gateway';
 import { ScrapperService } from '../scrapper.service';
-import { TagService } from 'src/tag';
-import { CategoryService } from 'src/category';
+import { TagService } from 'src/contexts/tag';
+import { CategoryService } from 'src/contexts/category';
+import { ConnectionInterceptor } from 'src/utils';
 
 describe('ScrapperService', () => {
   let scrapeTemplate: ScrapeTemplate;
   let articleService: ArticleService;
   let scrapperGateway: ScrapperGateway;
   let scrapperService: ScrapperService;
+  let tagService: TagService;
+  let categoryService: CategoryService;
 
   beforeEach(async () => {
     const scrapperModule = await Test.createTestingModule({
-      providers: [ScrapperGateway, ScrapeTemplate, ArticleService, ScrapperService, TagService, CategoryService],
+      providers: [
+        ScrapperGateway,
+        ScrapeTemplate,
+        ArticleService,
+        ScrapperService,
+        TagService,
+        CategoryService,
+        ConnectionInterceptor,
+      ],
     }).compile();
 
     scrapeTemplate = scrapperModule.get<ScrapeTemplate>(ScrapeTemplate);
     articleService = scrapperModule.get<ArticleService>(ArticleService);
     scrapperGateway = scrapperModule.get<ScrapperGateway>(ScrapperGateway);
     scrapperService = scrapperModule.get<ScrapperService>(ScrapperService);
+    tagService = scrapperModule.get<TagService>(TagService);
+    categoryService = scrapperModule.get<CategoryService>(CategoryService);
   });
 
   describe('scrape', () => {
@@ -35,8 +48,8 @@ describe('ScrapperService', () => {
 
       articleService.findByTitle = jest.fn().mockResolvedValueOnce(null).mockResolvedValueOnce({});
 
-      scrapeTemplate.createCategoryConnect = jest.fn().mockResolvedValue({ connect: [1] });
-      scrapeTemplate.createTagsConnect = jest.fn().mockResolvedValue(undefined);
+      categoryService.createCategoryConnection = jest.fn().mockResolvedValue({ connect: [1] });
+      tagService.createTagsConnection = jest.fn().mockResolvedValue(undefined);
       articleService.create = jest.fn().mockResolvedValue({ ...leftArticle, category: categoryFixture });
 
       scrapperGateway.sendArticlesUpdate = jest.fn();

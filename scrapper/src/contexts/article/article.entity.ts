@@ -1,6 +1,6 @@
-import { Category } from 'src/category';
+import { Category } from 'src/contexts/category';
 import { Nullable } from 'src/shared/types';
-import { Tag } from 'src/tag';
+import { Tag } from 'src/contexts/tag';
 
 export interface ParsedArticle {
   title: string;
