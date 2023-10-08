@@ -1,33 +1,42 @@
+'use client';
+
+import { useMemo } from 'react';
 import { StyledComponentsRegistry } from '@/lib/antd';
 import { theme } from '@/theme/override';
-import { ConfigProvider, Layout } from 'antd';
-import type { Metadata } from 'next';
-import { ContentWrapper, Navbar } from '@/components/';
+import { ConfigProvider, Layout, Grid, Spin } from 'antd';
+import { Content, Navbar } from '@/components/';
 import { ReduxProvider } from '@/store/provider';
+import Styled from './home.styled';
 
 import 'antd/dist/reset.css';
-import './globals.css';
 
-export const metadata: Metadata = {
-  title: 'БАТК | Перша шпальта',
-  description: 'Офіційний сайт БФК',
-};
+const { useBreakpoint } = Grid;
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
+  const screens = useBreakpoint();
+
+  const areScreensLoaded = useMemo(() => Object.keys(screens).length, [screens]);
+
   return (
     <html lang="uk-UA">
-      <body>
+      <Styled.Body>
         <ReduxProvider>
           <StyledComponentsRegistry>
             <ConfigProvider theme={theme}>
-              <Layout>
-                <Navbar />
-                <ContentWrapper>{children}</ContentWrapper>
-              </Layout>
+              {areScreensLoaded ? (
+                <Layout>
+                  <Navbar />
+                  <Content>{children}</Content>
+                </Layout>
+              ) : (
+                <Styled.ScreensLoaderWrapper>
+                  <Spin size="large" />
+                </Styled.ScreensLoaderWrapper>
+              )}
             </ConfigProvider>
           </StyledComponentsRegistry>
         </ReduxProvider>
-      </body>
+      </Styled.Body>
     </html>
   );
 }

@@ -3,10 +3,15 @@ import { Space } from 'antd';
 import { Link } from '../Typography';
 import Styled from './footer.styled';
 import { Copyright } from './Copyright';
+import { FC } from 'react';
 
-export const Footer = () => {
+type FooterProps = {
+  centered?: boolean;
+};
+
+export const Footer: FC<FooterProps> = ({ centered }) => {
   return (
-    <Space direction="vertical" size="large">
+    <Space direction="vertical" size="large" {...(centered && { style: { width: '100%', alignItems: 'center' } })}>
       <Space size="middle">
         <Styled.SocialLink href="https://www.facebook.com/AgroKolegeBerezhany/">
           <FacebookFilled />

@@ -4,6 +4,7 @@ import { colorBorder, colorSecondary } from '../../theme';
 import { breakpoints } from '../../shared/constants';
 import Link, { LinkProps } from 'next/link';
 import { config } from '../../utils';
+import { EyeFilled } from '@ant-design/icons';
 
 const Article = styled(Card)<CardProps>`
   margin-bottom: 32px;
@@ -75,17 +76,26 @@ const Views = styled.span`
   color: ${colorSecondary};
 `;
 
-const Meta = styled(Space)<SpaceProps>`
+const ViewsIcon = styled(EyeFilled)`
+  margin-right: 8px;
+  font-size: 10px;
+`;
+
+const Meta = styled(Space)<SpaceProps & { $position?: 'start' | 'end' }>`
   width: 100%;
   height: 100%;
   justify-content: center;
   color: ${colorSecondary};
 
   @media screen and (min-width: ${breakpoints.md}) {
-    justify-content: flex-end;
+    justify-content: ${(props) => {
+      const positions = { start: 'flex-start', end: 'flex-end' };
+
+      return positions[props.$position || 'end'];
+    }};
   }
 `;
 
-const Styled = { Article, Image, Views, Meta };
+const Styled = { Article, Image, Views, Meta, ViewsIcon };
 
 export default Styled;

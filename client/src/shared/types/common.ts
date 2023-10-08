@@ -12,7 +12,11 @@ export interface Pagination extends PaginationDTO {
 
 export interface APIResponse<D> {
   data: D;
-  meta: {
+  meta?: {
     pagination: Pagination;
   };
+}
+
+export interface PathParams<P> {
+  params: P;
 }

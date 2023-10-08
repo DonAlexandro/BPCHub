@@ -34,7 +34,7 @@ export const Article: React.FC<Partial<ArticleProps>> = ({
 }) => {
   const screens = useBreakpoint();
 
-  const articleUrl = useMemo(() => routes.article.path.replace(':id', id ? id.toString() : ''), [id]);
+  const articleUrl = useMemo(() => (id ? routes.article.path.replace(':id', id.toString()) : ''), [id]);
   const categoryUrl = useMemo(
     () => routes.category.path.replace(':id', categoryId ? categoryId.toString() : ''),
     [categoryId],
@@ -45,7 +45,7 @@ export const Article: React.FC<Partial<ArticleProps>> = ({
       title={
         loading ? (
           <Skeleton.Button block active />
-        ) : (
+        ) : articleUrl ? (
           <Link href={articleUrl}>
             <Title
               level={2}
@@ -56,6 +56,15 @@ export const Article: React.FC<Partial<ArticleProps>> = ({
               {title}
             </Title>
           </Link>
+        ) : (
+          <Title
+            level={2}
+            style={{
+              textAlign: screens.lg ? 'left' : 'center',
+            }}
+          >
+            {title}
+          </Title>
         )
       }
     >
@@ -77,22 +86,29 @@ export const Article: React.FC<Partial<ArticleProps>> = ({
         )}
         {!loading && (
           <Row>
-            <Col md={{ span: 12, order: 2 }} sm={24} xs={24} style={{ marginBottom: screens.md ? 0 : 32 }}>
-              <Styled.Meta split={<Divider type="vertical" />}>
+            <Col
+              md={articleUrl ? { span: 12, order: 2 } : 24}
+              sm={24}
+              xs={24}
+              style={{ marginBottom: screens.md ? 0 : 32 }}
+            >
+              <Styled.Meta $position={articleUrl ? 'end' : 'start'} split={<Divider type="vertical" />}>
                 <Link $secondary href={categoryUrl}>
                   {category}
                 </Link>
                 <div>
-                  <EyeFilled style={{ marginRight: 8, fontSize: 10 }} />
+                  <Styled.ViewsIcon />
                   <Styled.Views>{views || 0}</Styled.Views>
                 </div>
               </Styled.Meta>
             </Col>
-            <Col md={{ span: 12, order: 1 }} sm={24} xs={24}>
-              <Link href={articleUrl}>
-                <Button block={!screens.md}>Читати далі</Button>
-              </Link>
-            </Col>
+            {articleUrl && (
+              <Col md={{ span: 12, order: 1 }} sm={24} xs={24}>
+                <Link href={articleUrl}>
+                  <Button block={!screens.md}>Читати далі</Button>
+                </Link>
+              </Col>
+            )}
           </Row>
         )}
       </div>
