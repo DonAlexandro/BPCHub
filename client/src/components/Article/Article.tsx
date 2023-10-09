@@ -1,12 +1,11 @@
 'use client';
 
-import { EyeFilled } from '@ant-design/icons';
-import { Divider, Space, Grid, Row, Col, Skeleton } from 'antd';
+import { Divider, Grid, Row, Col, Skeleton } from 'antd';
 import React, { useMemo } from 'react';
 import { routes } from '../../shared/constants';
 import { Nullable } from '../../shared/types';
 import { Button } from '../Button';
-import { Text, Title, Link } from '../Typography';
+import { Text, Link } from '../Typography';
 import Styled from './article.styled';
 
 const { useBreakpoint } = Grid;
@@ -40,40 +39,40 @@ export const Article: React.FC<Partial<ArticleProps>> = ({
     [categoryId],
   );
 
+  const LinkTitle = articleUrl ? (
+    <Link href={articleUrl} data-testid="linked-title">
+      <Styled.Title>{title}</Styled.Title>
+    </Link>
+  ) : (
+    <Styled.Title data-testid="title">{title}</Styled.Title>
+  );
+
   return (
     <Styled.Article
       title={
         loading ? (
-          <Skeleton.Button block active />
-        ) : articleUrl ? (
-          <Link href={articleUrl}>
-            <Title
-              level={2}
-              style={{
-                textAlign: screens.lg ? 'left' : 'center',
-              }}
-            >
-              {title}
-            </Title>
-          </Link>
+          <div data-testid="loading-title">
+            <Skeleton.Button block active />
+          </div>
         ) : (
-          <Title
-            level={2}
-            style={{
-              textAlign: screens.lg ? 'left' : 'center',
-            }}
-          >
-            {title}
-          </Title>
+          LinkTitle
         )
       }
     >
       <div style={{ padding: screens.md ? '0 48px' : 0 }}>
-        <Styled.Image href={articleUrl} $loading={loading} $image={image} />
+        {articleUrl ? (
+          <Link href={articleUrl} data-testid="linked-image">
+            <Styled.Image $loading={loading} $image={image} />
+          </Link>
+        ) : (
+          <Styled.Image $loading={loading} $image={image} data-testid="image" />
+        )}
       </div>
       <div style={{ padding: screens.md ? '0 48px' : '0 24px' }}>
         {loading ? (
-          <Skeleton title={false} active paragraph={{ rows: 4 }} style={{ marginBottom: 32 }} />
+          <div data-testid="loading-description">
+            <Skeleton title={false} active paragraph={{ rows: 4 }} style={{ marginBottom: 32 }} />
+          </div>
         ) : (
           <Text
             style={{
@@ -85,7 +84,7 @@ export const Article: React.FC<Partial<ArticleProps>> = ({
           </Text>
         )}
         {!loading && (
-          <Row>
+          <Row data-testid="article-meta">
             <Col
               md={articleUrl ? { span: 12, order: 2 } : 24}
               sm={24}
@@ -98,14 +97,16 @@ export const Article: React.FC<Partial<ArticleProps>> = ({
                 </Link>
                 <div>
                   <Styled.ViewsIcon />
-                  <Styled.Views>{views || 0}</Styled.Views>
+                  <Styled.Views>{views ?? 0}</Styled.Views>
                 </div>
               </Styled.Meta>
             </Col>
             {articleUrl && (
               <Col md={{ span: 12, order: 1 }} sm={24} xs={24}>
                 <Link href={articleUrl}>
-                  <Button block={!screens.md}>Читати далі</Button>
+                  <Button block={!screens.md} data-testid="read-more-button">
+                    Читати далі
+                  </Button>
                 </Link>
               </Col>
             )}
