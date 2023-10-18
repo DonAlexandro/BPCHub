@@ -2,8 +2,10 @@ import { Card, CardProps, Space, SpaceProps } from 'antd';
 import styled from 'styled-components';
 import { colorBorder, colorSecondary } from '../../theme';
 import { breakpoints } from '../../shared/constants';
-import Link, { LinkProps } from 'next/link';
 import { config } from '../../utils';
+import { EyeFilled } from '@ant-design/icons';
+import { Title as DefaultTitle } from '../Typography';
+import { ArticleImageProps } from './interface';
 
 const Article = styled(Card)<CardProps>`
   margin-bottom: 32px;
@@ -44,12 +46,7 @@ const Article = styled(Card)<CardProps>`
   }
 `;
 
-type ArticleImageProps = {
-  $image?: string;
-  $loading?: boolean;
-};
-
-const Image = styled(Link)<LinkProps & ArticleImageProps>`
+const Image = styled.div<ArticleImageProps>`
   display: inline-block;
   width: 100%;
   position: relative;
@@ -75,17 +72,34 @@ const Views = styled.span`
   color: ${colorSecondary};
 `;
 
-const Meta = styled(Space)<SpaceProps>`
+const ViewsIcon = styled(EyeFilled)`
+  margin-right: 8px;
+  font-size: 10px;
+`;
+
+const Meta = styled(Space)<SpaceProps & { $position?: 'start' | 'end' }>`
   width: 100%;
   height: 100%;
   justify-content: center;
   color: ${colorSecondary};
 
   @media screen and (min-width: ${breakpoints.md}) {
-    justify-content: flex-end;
+    justify-content: ${(props) => {
+      const positions = { start: 'flex-start', end: 'flex-end' };
+
+      return positions[props.$position ?? 'end'];
+    }};
   }
 `;
 
-const Styled = { Article, Image, Views, Meta };
+const Title = styled(DefaultTitle)`
+  text-align: center;
+
+  @media screen and (min-width: ${breakpoints.lg}) {
+    text-align: left;
+  }
+`;
+
+const Styled = { Article, Image, Views, Meta, ViewsIcon, Title };
 
 export default Styled;

@@ -13,12 +13,23 @@ const meta: Meta<typeof Footer> = {
       </ConfigProvider>
     ),
   ],
+  argTypes: {
+    centered: {
+      control: 'boolean',
+    },
+  },
 };
 
 type Story = StoryObj<typeof Footer>;
 
 export const Default: Story = {
   render: () => <Footer />,
+};
+
+export const Centered: Story = {
+  args: {
+    centered: true,
+  },
 };
 
 export default meta;

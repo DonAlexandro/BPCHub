@@ -21,5 +21,12 @@ export const articleAPI = createApi({
         return `/articles?${searchParams}`;
       },
     }),
+    findOne: builder.query<APIResponse<Article>, { id: string }>({
+      query: ({ id }) => {
+        const searchParams = qs.stringify({ populate: '*' });
+
+        return `/articles/${id}?${searchParams}`;
+      },
+    }),
   }),
 });

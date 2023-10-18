@@ -1,6 +1,6 @@
 'use client';
 import { PaginationDTO } from '../../shared/types';
-import { Space, Grid } from 'antd';
+import { Grid } from 'antd';
 import React, { Dispatch, FC, SetStateAction } from 'react';
 import { Button } from '../Button/Button';
 import Styled from './pagination.styled';
