@@ -6,7 +6,6 @@ import { ScrapperGateway } from '../scrapper.gateway';
 import { ScrapperService } from '../scrapper.service';
 import { TagService } from 'src/contexts/tag';
 import { CategoryService } from 'src/contexts/category';
-import { ConnectionInterceptor } from 'src/utils';
 
 describe('ScrapperService', () => {
   let scrapeTemplate: ScrapeTemplate;
@@ -18,15 +17,7 @@ describe('ScrapperService', () => {
 
   beforeEach(async () => {
     const scrapperModule = await Test.createTestingModule({
-      providers: [
-        ScrapperGateway,
-        ScrapeTemplate,
-        ArticleService,
-        ScrapperService,
-        TagService,
-        CategoryService,
-        ConnectionInterceptor,
-      ],
+      providers: [ScrapperGateway, ScrapeTemplate, ArticleService, ScrapperService, TagService, CategoryService],
     }).compile();
 
     scrapeTemplate = scrapperModule.get<ScrapeTemplate>(ScrapeTemplate);

@@ -1,12 +1,12 @@
-import { Injectable, UseInterceptors } from '@nestjs/common';
+import { Injectable } from '@nestjs/common';
 import { stringify } from 'qs';
-import { ConnectionInterceptor, backendRequest } from 'src/utils';
+import { Connection, backendRequest } from 'src/utils';
 import { Tag } from './tag.entity';
 import { CreateTagDTO } from './tag.dto';
+import { Connect } from 'src/shared/types';
 
 @Injectable()
 export class TagService {
-  constructor(private readonly connectionInterceptor: ConnectionInterceptor) {}
   /**
    * This function returns required by Strapi object to create a relation between tags and articles
    * Read more in the official documentaion: https://docs.strapi.io/dev-docs/api/rest/relations.
@@ -14,8 +14,9 @@ export class TagService {
    *
    * @param {string[]} tags - a tags array to find them by their titles
    */
-  @UseInterceptors(ConnectionInterceptor)
-  async createTagsConnection(tags: string[]) {
+  async createTagsConnection(tags: string[]): Promise<Connect>;
+  @Connection
+  async createTagsConnection(tags: string[]): Promise<any> {
     if (tags?.length) {
       const tagIds = await Promise.all(
         tags.map(async (parsedTag) => {
@@ -29,7 +30,7 @@ export class TagService {
         }),
       );
 
-      return this.connectionInterceptor.intercept(tagIds);
+      return tagIds;
     }
   }
 

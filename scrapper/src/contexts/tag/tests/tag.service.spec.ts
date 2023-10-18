@@ -1,4 +1,3 @@
-import { ConnectionInterceptor } from 'src/utils';
 import { TagService } from '../tag.service';
 import { Test } from '@nestjs/testing';
 
@@ -7,7 +6,7 @@ describe('TagService', () => {
 
   beforeEach(async () => {
     const scrapperModule = await Test.createTestingModule({
-      providers: [TagService, ConnectionInterceptor],
+      providers: [TagService],
     }).compile();
 
     tagService = scrapperModule.get<TagService>(TagService);
