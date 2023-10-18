@@ -16,7 +16,7 @@ export class ScrapperService {
     private readonly scrapperGateway: ScrapperGateway,
   ) {}
 
-  @Cron(CronExpression.EVERY_DAY_AT_10AM)
+  @Cron(CronExpression.EVERY_HOUR)
   async scrape() {
     const parsedArticles = await this.scrapeTemplate.parseArticles();
 
