@@ -12,7 +12,7 @@ describe('Article', () => {
     };
   };
 
-  it('should render the button and the title and the image covered in Link', () => {
+  it('should render the button, the title and the image covered in Link', () => {
     const { title, description, category, image } = prepareFixtures();
 
     render(
@@ -46,7 +46,7 @@ describe('Article', () => {
     expect(Description).toBeInTheDocument();
   });
 
-  it('should not render the button and should render the image and the title without Link', () => {
+  it('should not render the button, the image and the title without Link', () => {
     const { title, description, category, image } = prepareFixtures();
 
     render(

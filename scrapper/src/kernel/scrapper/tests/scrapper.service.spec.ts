@@ -37,7 +37,7 @@ describe('ScrapperService', () => {
         .fn()
         .mockResolvedValue([leftArticle].concat([{ title: faker.lorem.words(5) }]));
 
-      articleService.findByTitle = jest.fn().mockResolvedValueOnce(null).mockResolvedValueOnce({});
+      articleService.findOne = jest.fn().mockResolvedValueOnce(null).mockResolvedValueOnce({});
 
       categoryService.createCategoryConnection = jest.fn().mockResolvedValue({ connect: [1] });
       tagService.createTagsConnection = jest.fn().mockResolvedValue(undefined);

@@ -22,7 +22,10 @@ export class ScrapperService {
 
     const articles = await Promise.all(
       parsedArticles.map(async (article) => {
-        const existingArticle = await this.articleService.findByTitle(article.title);
+        const existingArticle = await this.articleService.findOne({
+          title: article.title,
+          externalId: article.externalId,
+        });
 
         if (!existingArticle) {
           const categoryConnection = await this.categoryService.createCategoryConnection(article.category);

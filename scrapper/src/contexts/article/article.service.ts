@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { stringify } from 'qs';
-import { backendRequest } from 'src/utils';
+import { backendRequest, buildEqualitySearchParams } from 'src/utils';
 import { CreateArticleDTO } from './article.dto';
 import { Article, ExtendedArticle } from './article.entity';
 import { SingleResponse } from 'src/shared/types';
@@ -18,8 +18,8 @@ export class ArticleService {
     return article.data.data;
   }
 
-  async findByTitle(title: string): FindByTitleResponseType {
-    const searchParams = stringify({ filters: { title: { $eq: title } } });
+  async findOne(condition: Partial<Article>): FindByTitleResponseType {
+    const searchParams = buildEqualitySearchParams(condition);
 
     const articles = await backendRequest.get('/articles?' + searchParams);
     const article = articles.data.data[0];
