@@ -1,6 +1,7 @@
 .husky
 .next
 node_modules
+plop-*
 public
 .env
 package-lock.json
