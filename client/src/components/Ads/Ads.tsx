@@ -8,7 +8,7 @@ import { ResultError } from '../Error';
 import Styled from './ads.styled';
 
 export const Ads: FC = () => {
-  const [findAds, { data: ads, isLoading, isError }] = articleAPI.useLazyFindAdsQuery()
+  const [findAds, { data: ads, isLoading, isError }] = articleAPI.useLazyFindAdsQuery();
 
   useEffect(() => {
     findAds();
@@ -36,9 +36,7 @@ export const Ads: FC = () => {
   }, [findAds]);
 
   if (isError) {
-    return (
-      <ResultError title="На жаль, сталася помилка при завантаженні оголошень" />
-    );
+    return <ResultError title="На жаль, сталася помилка при завантаженні оголошень" />;
   }
 
   return (

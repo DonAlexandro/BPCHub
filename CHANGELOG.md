@@ -2,6 +2,28 @@
 
 Всі важливі зміни в цьому проєкті будуть задокументовані в цьому файлі.
 
+## [0.1.0] - 2023-10-31
+
+### Added
+
+#### Root
+
+- Linters to pre-commit hooks
+- Github pull request template
+
+#### Client
+
+- Section with ads on the left side
+- Tests for ads component
+
+#### Backend
+
+- New column `externalLink` to store URLs of ads
+
+#### Scrapper
+
+- New methods to parse ads
+
 ## \[0.0.9] - 2023-10-01
 
 ### Added

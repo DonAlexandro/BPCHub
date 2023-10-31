@@ -47,11 +47,7 @@ export default function Home() {
     }
 
     if (isError) {
-      return (
-        <ResultError
-          title="На жаль, сталася помилка при завантаженні статей"
-        />
-      );
+      return <ResultError title="На жаль, сталася помилка при завантаженні статей" />;
     }
 
     if (!data?.data.length) {
