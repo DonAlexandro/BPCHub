@@ -14,4 +14,9 @@ export class ScrapperGateway {
   sendArticlesUpdate(articles: SingleResponse<ExtendedArticle>[]) {
     this.server.emit('articles', articles);
   }
+
+  @SubscribeMessage('ads')
+  sendAdsUpdate(ads: SingleResponse<ExtendedArticle>[]) {
+    this.server.emit('ads', ads);
+  }
 }

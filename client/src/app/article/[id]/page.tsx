@@ -34,7 +34,7 @@ const FullArticle: FC<FullArticleProps> = ({ params }) => {
         viewsAdapter.setViewedArticle(numberedArticleId);
       });
     }
-  }, [articleId]);
+  }, [articleId, update, views]);
 
   return (
     <>

@@ -1,5 +1,4 @@
 import { Injectable } from '@nestjs/common';
-import { Cron, CronExpression } from '@nestjs/schedule';
 import { ScrapeTemplate } from './templates';
 import { ArticleService } from 'src/contexts/article';
 import { ScrapperGateway } from './scrapper.gateway';
@@ -16,9 +15,11 @@ export class ScrapperService {
     private readonly scrapperGateway: ScrapperGateway,
   ) {}
 
-  @Cron(CronExpression.EVERY_HOUR)
   async scrape() {
-    const parsedArticles = await this.scrapeTemplate.parseArticles();
+    const [parsedArticles, parsedAds] = await Promise.all([
+      this.scrapeTemplate.parseArticles(),
+      this.scrapeTemplate.parseAds(),
+    ]);
 
     const articles = await Promise.all(
       parsedArticles.map(async (article) => {
@@ -38,9 +39,18 @@ export class ScrapperService {
       }),
     );
 
+    const ads = await Promise.all(
+      parsedAds.map(async (ad) => {
+        const categoryConnection = await this.categoryService.createCategoryConnection(ad.category);
+
+        return this.articleService.create({ ...ad, category: categoryConnection });
+      }),
+    );
+
     // Filter articles to keep only new ones in the array and remove nulls
     const newArticles = articles.filter((article) => article);
 
     this.scrapperGateway.sendArticlesUpdate(newArticles);
+    this.scrapperGateway.sendAdsUpdate(ads);
   }
 }

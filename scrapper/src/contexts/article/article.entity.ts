@@ -12,24 +12,31 @@ export interface ParsedArticle {
   tags?: string[];
 }
 
+export interface ParsedAd {
+  title: string;
+  category: string;
+  externalLink: string;
+}
+
 export interface Article {
   title: string;
-  externalId: string;
+  externalId?: string;
   views: Nullable<number>;
-  description: string;
-  image: string;
+  description?: string;
+  image?: string;
   content: Nullable<string>;
   createdAt: Date;
   updatedAt: Date;
   publishedAt: Date;
-  externalPublishDate: Date;
+  externalPublishDate?: Date;
+  externalLink?: string;
 }
 
 export interface ExtendedArticle extends Article {
   category: {
     data: Category;
   };
-  tags: {
+  tags?: {
     data: Tag[];
   };
 }

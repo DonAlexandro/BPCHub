@@ -3,6 +3,7 @@ export * from './content';
 export * from './Header/Header';
 export * from './Pagination/Pagination';
 export * from './Button/Button';
-export * from './ads';
+export * from './Ads/Ads';
 export * from './Footer/Footer';
 export * from './Navbar/Navbar';
+export * from './Error/Error';

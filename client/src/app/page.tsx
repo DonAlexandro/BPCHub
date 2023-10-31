@@ -1,16 +1,15 @@
 'use client';
-import { Ads, Article, Footer, Header, Pagination } from '@/components';
-import { useAppDispatch } from '@/hooks';
+
+import { Ads, Article, Footer, Header, Pagination, ResultError } from '@/components';
 import { articleAPI } from '@/store/api';
 import { config } from '@/utils';
-import { Empty, Result, Grid, Row, Col, Divider } from 'antd';
+import { Empty, Grid, Row, Col, Divider } from 'antd';
 import { useCallback, useEffect, useState } from 'react';
 import { io } from 'socket.io-client';
 
 const { useBreakpoint } = Grid;
 
 export default function Home() {
-  const dispatch = useAppDispatch();
   const screens = useBreakpoint();
 
   const [pagination, setPagination] = useState({ page: 1, pageSize: 6 });
@@ -27,6 +26,7 @@ export default function Home() {
     });
 
     socket.on('connection', () => {
+      // eslint-disable-next-line no-console
       console.log('Okay, you are connected to websockets');
     });
 
@@ -39,7 +39,7 @@ export default function Home() {
     return () => {
       socket.disconnect();
     };
-  }, [pagination, dispatch, findAll]);
+  }, [pagination, findAll]);
 
   const render = useCallback(() => {
     if (isLoading) {
@@ -47,13 +47,7 @@ export default function Home() {
     }
 
     if (isError) {
-      return (
-        <Result
-          status="500"
-          title="На жаль, сталася помилка при завантаженні статей"
-          subTitle="Повторіть спробу через деякий час, або повідомте, будь ласка, нам про проблему, якщо вона не зникає"
-        />
-      );
+      return <ResultError title="На жаль, сталася помилка при завантаженні статей" />;
     }
 
     if (!data?.data.length) {

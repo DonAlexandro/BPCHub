@@ -18,7 +18,7 @@
     },
     "externalId": {
       "type": "string",
-      "required": true,
+      "required": false,
       "unique": true
     },
     "views": {
@@ -47,6 +47,10 @@
     },
     "externalPublishDate": {
       "type": "datetime"
+    },
+    "externalLink": {
+      "type": "string",
+      "unique": true
     }
   }
 }

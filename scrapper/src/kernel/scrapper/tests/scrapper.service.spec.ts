@@ -31,23 +31,36 @@ describe('ScrapperService', () => {
   describe('scrape', () => {
     it('should return an array with only 1 parsed article, because another one already exists in the DB', async () => {
       const leftArticle = { title: faker.lorem.words(5) };
+      const ad = { title: faker.lorem.words(5) };
+
       const categoryFixture = { id: 1, data: { title: 'Test Category' } };
+      const adCategoryFixture = { id: 2, data: { title: 'Ad' } };
 
       scrapeTemplate.parseArticles = jest
         .fn()
         .mockResolvedValue([leftArticle].concat([{ title: faker.lorem.words(5) }]));
 
+      scrapeTemplate.parseAds = jest.fn().mockResolvedValue([ad]);
+
       articleService.findOne = jest.fn().mockResolvedValueOnce(null).mockResolvedValueOnce({});
 
-      categoryService.createCategoryConnection = jest.fn().mockResolvedValue({ connect: [1] });
+      categoryService.createCategoryConnection = jest
+        .fn()
+        .mockResolvedValueOnce({ connect: [1] })
+        .mockResolvedValueOnce({ connect: [2] });
       tagService.createTagsConnection = jest.fn().mockResolvedValue(undefined);
-      articleService.create = jest.fn().mockResolvedValue({ ...leftArticle, category: categoryFixture });
+      articleService.create = jest
+        .fn()
+        .mockResolvedValueOnce({ ...leftArticle, category: categoryFixture })
+        .mockResolvedValueOnce({ ...ad, category: adCategoryFixture });
 
       scrapperGateway.sendArticlesUpdate = jest.fn();
+      scrapperGateway.sendAdsUpdate = jest.fn();
 
       await scrapperService.scrape();
 
       expect(scrapperGateway.sendArticlesUpdate).toBeCalledWith([{ ...leftArticle, category: categoryFixture }]);
+      expect(scrapperGateway.sendAdsUpdate).toBeCalledWith([{ ...ad, category: adCategoryFixture }]);
     });
   });
 });
