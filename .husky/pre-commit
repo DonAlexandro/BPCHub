@@ -13,5 +13,18 @@ runAllTests() {
   popd || exit 1
 }
 
+runAllLinters() {
+  commandToExecute="npm run lint"
+
+  pushd ./scrapper 1>/dev/null || exit 1
+  eval "$commandToExecute"
+  popd || exit 1
+
+  pushd ./client 1>/dev/null || exit 1
+  eval "$commandToExecute"
+  popd || exit 1
+}
+
+runAllLinters
 runAllTests
 npm run format

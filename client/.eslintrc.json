@@ -1,9 +1,12 @@
 {
   "extends": [
-    "next/babel",
+    "next",
     "next/core-web-vitals",
     "plugin:storybook/recommended",
     "plugin:testing-library/react",
     "plugin:jest-dom/recommended"
-  ]
+  ],
+  "rules": {
+    "no-console": "error"
+  }
 }

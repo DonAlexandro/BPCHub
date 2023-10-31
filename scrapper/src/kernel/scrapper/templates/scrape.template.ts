@@ -2,7 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { AxiosResponse } from 'axios';
 import * as cheerio from 'cheerio';
 import { bpcRequest, withTimeout } from 'src/utils';
-import { ParsedArticle } from 'src/contexts/article';
+import { ParsedAd, ParsedArticle } from 'src/contexts/article';
 
 @Injectable()
 export class ScrapeTemplate {
@@ -46,6 +46,22 @@ export class ScrapeTemplate {
     });
 
     return articles;
+  }
+
+  async parseAds(): Promise<ParsedAd[]> {
+    const { $, html } = await this.loadHtml();
+
+    const ads = [];
+
+    $('#sp-main-body .sp-module_poster .mod-list li', html.data).each(function () {
+      const title = $('.mod-articles-category-title', this).text().trim();
+      const externalLink = $('.mod-articles-category-title', this).attr().href;
+      const category = 'Оголошення';
+
+      ads.push({ title, category, externalLink });
+    });
+
+    return ads;
   }
 
   private async loadHtml() {
