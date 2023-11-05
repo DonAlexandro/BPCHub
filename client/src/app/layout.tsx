@@ -12,7 +12,7 @@ import 'antd/dist/reset.css';
 
 const { useBreakpoint } = Grid;
 
-export default function RootLayout({ children }: { children: React.ReactNode }) {
+export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   const screens = useBreakpoint();
 
   const areScreensLoaded = useMemo(() => Object.keys(screens).length, [screens]);

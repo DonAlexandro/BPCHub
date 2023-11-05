@@ -7,3 +7,4 @@ export * from './Ads/Ads';
 export * from './Footer/Footer';
 export * from './Navbar/Navbar';
 export * from './Error/Error';
+export * from './Meta/Meta';

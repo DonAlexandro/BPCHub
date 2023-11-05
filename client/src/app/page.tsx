@@ -1,10 +1,11 @@
 'use client';
 
-import { Ads, Article, Footer, Header, Pagination, ResultError } from '@/components';
+import { Ads, Article, Footer, Header, Meta, Pagination, ResultError } from '@/components';
 import { articleAPI } from '@/store/api';
 import { config } from '@/utils';
 import { Empty, Grid, Row, Col, Divider } from 'antd';
 import { useCallback, useEffect, useState } from 'react';
+import { Helmet } from 'react-helmet';
 import { io } from 'socket.io-client';
 
 const { useBreakpoint } = Grid;
@@ -79,6 +80,7 @@ export default function Home() {
 
   return (
     <>
+      <Meta title="Головна" />
       {!screens.xl && <Header />}
       <Row gutter={48} style={{ marginRight: 0 }}>
         <Col xl={{ span: 17, order: 2 }} md={24} sm={24} xs={24} style={{ paddingRight: 0 }}>

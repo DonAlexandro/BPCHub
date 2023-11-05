@@ -51,4 +51,32 @@ export default function (plop) {
       },
     ],
   });
+
+  plop.setGenerator('view', {
+    description: 'Generates a new view of the component',
+    prompts: [
+      {
+        type: 'input',
+        name: 'name',
+        message: 'Enter view name:',
+      },
+    ],
+    actions: [
+      {
+        type: 'add',
+        path: 'src/components/{{capitalize name}}/{{capitalize name}}.tsx',
+        templateFile: 'plop-templates/component.hbs',
+      },
+      {
+        type: 'add',
+        path: 'src/components/{{capitalize name}}/index.ts',
+        templateFile: 'plop-templates/component-index.hbs',
+      },
+      {
+        type: 'add',
+        path: 'src/components/{{capitalize name}}/interface.ts',
+        templateFile: 'plop-templates/component-interface.hbs',
+      },
+    ],
+  });
 }
