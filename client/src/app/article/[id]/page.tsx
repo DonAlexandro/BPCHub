@@ -1,6 +1,6 @@
 'use client';
 
-import { Article, Footer } from '@/components';
+import { Article, Footer, Meta } from '@/components';
 import { PathParams } from '@/shared/types';
 import { viewsAdapter } from '@/storage';
 import { articleAPI } from '@/store/api';
@@ -38,6 +38,7 @@ const FullArticle: FC<FullArticleProps> = ({ params }) => {
 
   return (
     <>
+      <Meta title={article?.data.attributes.title} />
       <Article
         loading={loading}
         title={article?.data.attributes.title}
